@@ -11,16 +11,17 @@ export default function Application(props) {
     <SafeAreaProvider style={styles.container}>
         <Text style={styles.LovelyText}>Te Amo mucho Ahimet!</Text>
     <SpeedDial
-      isOpen={open}
-      icon={{ name: 'edit', color: '#fff' }}
+      isOpen={open}  
+      icon={{ name: 'menu-open', color: '#fff' }}
       openIcon={{ name: 'edit', color: '#fff' }}
       onOpen={() => setOpen(!open)}
       onClose={() => setOpen(!open)}
     >
       <SpeedDial.Action
-        icon={{ name: 'close', color: '#fff' }}
+        icon={{ name: 'logout', color: '#fff' }}
         title="LogOf"
         onPress={()=>setIsSignedIn(false)}
+        overlayColor={'#B1044F'}
       />
       
     </SpeedDial>
