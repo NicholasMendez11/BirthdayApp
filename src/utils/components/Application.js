@@ -1,31 +1,77 @@
 import React,{useState} from 'react';
-import { StyleSheet,Text} from 'react-native'
+import { StyleSheet,Text,SafeAreaView, StatusBar} from 'react-native'
 import { SpeedDial } from 'react-native-elements';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { getAuth, signOut } from "firebase/auth";
+import AddBirthday from './AddBirthday';
 
 export default function Application(props) {
     const {setIsSignedIn}= props;
+    const [showList, setShowList] = useState(true)
+    const [open, setOpen] = useState(false);
 
-  const [open, setOpen] = useState(false);
+
+
+    const Signout =() =>{
+
+
+          const auth = getAuth();
+          signOut(auth).then(() => {
+            alert('Fuera')
+            setIsSignedIn(false)
+
+          }).catch((error) => {
+            alert('Palo')
+          });
+
+    }
+
+
+    
   return (
-    <SafeAreaProvider style={styles.container}>
-        <Text style={styles.LovelyText}>Te Amo mucho Ahimet!</Text>
-    <SpeedDial
+    
+    <SafeAreaView style={styles.container}>
+       <StatusBar barStyle='light-content' backgroundColor="#1ea1f2" />
+       <SpeedDial
       isOpen={open}  
-      icon={{ name: 'menu-open', color: '#fff' }}
-      openIcon={{ name: 'edit', color: '#fff' }}
+      icon={{ name: 'menu-open', color: '#B1044F' }}
+      openIcon={{ name: 'menu-open', color: '#B1044F' }}
       onOpen={() => setOpen(!open)}
       onClose={() => setOpen(!open)}
+      color='#FFF'
     >
+       <SpeedDial.Action
+        icon={{ name: 'person-add', color: '#fff' }}
+        title={showList? "Add new Birthday":"Confirm Birthday"}
+        onPress={()=>setShowList(!showList)}
+        color='#1ea1f2'
+      
+      />
       <SpeedDial.Action
         icon={{ name: 'logout', color: '#fff' }}
         title="LogOf"
-        onPress={()=>setIsSignedIn(false)}
-        overlayColor={'#B1044F'}
+        onPress={Signout}
+        color='#820000'
+
       />
+     
       
     </SpeedDial>
-    </SafeAreaProvider>
+        {showList? 
+        <><Text style={styles.LovelyText}>LIST</Text>
+        <Text style={styles.LovelyText}>LIST</Text>
+        <Text style={styles.LovelyText}>LIST</Text>
+        <Text style={styles.LovelyText}>LIST</Text>
+        </>
+        :
+          <AddBirthday
+          setShowList={setShowList}/>
+        }
+        
+  
+
+    </SafeAreaView>
+
+
   )}
 
 const styles = StyleSheet.create({
@@ -33,9 +79,10 @@ const styles = StyleSheet.create({
     container:{
         flex: 1,
         backgroundColor:"#15212b",
-        height: null,
+        height: '100%',
         alignItems:"center",
         justifyContent:"center",
+        
     },
     LovelyText:{
         width: 364,
@@ -43,11 +90,10 @@ const styles = StyleSheet.create({
         marginLeft:25 ,
         top:10,
         color: "#FFFFFF",
-        //fontFamily:"Sans-serif",
         fontWeight:'bold',
         fontSize:32,
         lineHeight:38,
-    
+        textAlign:'center'
       },
 
     LogOfButtom:{

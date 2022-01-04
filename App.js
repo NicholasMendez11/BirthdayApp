@@ -1,27 +1,11 @@
-import React, {useState,useEffect} from 'react'
+import React, {useState} from 'react'
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { StyleSheet, Text, View, TouchableOpacity,SafeAreaView,Image, StatusBar } from 'react-native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack'
-import {NavigationContainer } from'@react-navigation/native';
-import Register from './src/utils/components/Register';
+import { StyleSheet, Text,TouchableOpacity,Image} from 'react-native';
 import LogIn from './src/utils/components/LogIn';
 import Application from './src/utils/components/Application'
 import 'firebase/auth';
-/*import {AppLoading} from 'expo-app-loading';
-import { useFonts,
-  Lato_100Thin,
-  Lato_100Thin_Italic,
-  Lato_300Light,
-  Lato_300Light_Italic,
-  Lato_400Regular,
-  Lato_400Regular_Italic,
-  Lato_700Bold,
-  Lato_700Bold_Italic,
-  Lato_900Black,
-  Lato_900Black_Italic 
-} from '@expo-google-fonts/lato'*/
-import { authentication } from './src/utils/firebase';
-import {createUserWithEmailAndPassword, signInWithEmailAndPassword  } from "firebase/auth";
+import Register from './src/utils/components/Register';
+
 
 
 export default function App() {
